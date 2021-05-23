@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 15:55:45 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 00:38:38 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 13:13:45 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	rubik_program_usage(void)
 	"-w\t\tdisplay 3d rubik" << std::endl <<
 	std::endl <<
 	"WINDOW COMMAND" << std::endl <<
-	"\t'r' to start the resolve of the rubik" << std::endl <<
+	"\t'r' to start to resolve the rubik" << std::endl <<
 	"\t'w' to go forward and      's' to go backward" << std::endl <<
 	"\t'd' to go to the right and 'a' to go to the left" << std::endl <<
 	"\t'e' to go up and           'q' to go down" << std::endl;
