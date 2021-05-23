@@ -6,7 +6,7 @@
 #    By: niduches <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/19 16:00:17 by niduches          #+#    #+#              #
-#    Updated: 2021/05/22 16:40:50 by niduches         ###   ########.fr        #
+#    Updated: 2021/05/23 01:21:34 by niduches         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ clean:
 	@rm -rf $(BUILD_DIR)
 
 fclean:
-	@$(MAKE) clean
+	@$(MAKE) --no-print-directory clean
 	@rm -f $(NAME)
 	@rm -f *~
 
@@ -66,7 +66,7 @@ $(NAME): $(OBJ)
 	@$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@$(MAKE) --no-print-directory fclean
+	@$(MAKE) --no-print-directory all
 
 .PHONY: all clean fclean re

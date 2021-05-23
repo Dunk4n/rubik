@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:27:51 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 00:41:29 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 01:37:00 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,24 +130,40 @@ std::vector<int> id(std::vector<int> state, int phase)
 	return (state);
 }
 
-void	display_move(std::vector<int> &algorithm, std::vector<int> &currentState, std::string &sol)
+void	display_move(class Rubik *ru, std::vector<int> &algorithm, std::vector<int> &currentState, std::string &sol)
 {
 	std::string new_instruction = "";
+	std::string direction[6] = {"up", "down", "front", "back", "left", "right"};
 
 	for (int i = 0; i < (int)algorithm.size(); i++)
 	{
-		sol += "UDFBLR"[algorithm[i] / 3];
+		new_instruction.clear();
+		new_instruction = "UDFBLR"[(algorithm[i] / 3) % 6];
+
 		if (algorithm[i] % 3 + 1 == 2)
-			sol += '2';
+			new_instruction += '2';
 		else if (algorithm[i] % 3 + 1 == 3)
-			sol += '\'';
-		std::cout << "thislewait: " << sol << std::endl;
+			new_instruction += '\'';
+		if (ru->get_human_readable() == true)
+		{
+			std::cout << new_instruction << ':' << std::endl;
+			std::cout << "Rotate the " << direction[(algorithm[i] / 3) % 6] << " face ";
+			if (algorithm[i] % 3 + 1 == 2)
+				std::cout << "two times ";
+			else
+				std::cout << "one time ";
+			if (algorithm[i] % 3 + 1 == 3)
+				std::cout << "cunter";
+			std::cout << "clockwise." << std::endl;
+			std::cout << std::endl;
+		}
+		sol += new_instruction;
 		sol += ' ';
 		currentState = applyMove(algorithm[i], currentState);
 	}
 }
 
-void	make_phase(int phase, std::vector<int> &currentState, std::vector<int> &goalState, std::string &sol)
+void	make_phase(class Rubik *ru, int phase, std::vector<int> &currentState, std::vector<int> &goalState, std::string &sol)
 {
 	std::vector<int> currentId = id(currentState, phase);
 	std::vector<int> goalId = id(goalState, phase);
@@ -194,7 +210,7 @@ void	make_phase(int phase, std::vector<int> &currentState, std::vector<int> &goa
 					algorithm.push_back(inverse(lastMove[newId]));
 					newId = predecessor[newId];
 				}
-				display_move(algorithm, currentState, sol);
+				display_move(ru, algorithm, currentState, sol);
 				return ;
 			}
 			if(!newDir)
@@ -208,7 +224,7 @@ void	make_phase(int phase, std::vector<int> &currentState, std::vector<int> &goa
 	}
 }
 
-int		thistlethwaite(std::vector<int> &currentState, std::string &sol)
+int		thistlethwaite(class Rubik *ru, std::vector<int> &currentState, std::string &sol)
 {
 	int					phase;
 	std::vector<int>	goalState(40);
@@ -217,7 +233,7 @@ int		thistlethwaite(std::vector<int> &currentState, std::string &sol)
 		goalState[i] = i;
 	phase = 0;
 	while (phase < 5)
-		make_phase(++phase, currentState, goalState, sol);
+		make_phase(ru, ++phase, currentState, goalState, sol);
 	return (0);
 }
 
@@ -231,5 +247,5 @@ void		Rubik::format(void)
 		set_id(pos[i], &currentState[i], &currentState[i + 20]);
 		++i;
 	}
-	thistlethwaite(currentState, this->solution);
+	thistlethwaite(this, currentState, this->solution);
 }

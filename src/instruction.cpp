@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 00:23:04 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/22 17:14:02 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 01:50:20 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,30 @@ int		Rubik::get_instruction(char *&instructions, int face) const
 
 void	Rubik::display_instruction(int instr, int factor)
 {
+	std::string new_instruction = "";
+	std::string direction[6] = {"front", "right", "up", "back", "left", "down"};
+
 	if (!this->sol)
 		return ;
-	std::cout << "AAAAA simple\n";
-	this->solution += instructions_name[instr];
+	new_instruction = this->instructions_name[instr % 6];
 	if (factor == 2)
-		this->solution += '2';
+		new_instruction += '2';
 	else if (factor < 0)
-		this->solution += '\'';
+		new_instruction += '\'';
+	if (this->human_readable == true)
+	{
+		std::cout << new_instruction << ':' << std::endl;
+		std::cout << "Rotate the " << direction[instr % 6] << " face ";
+		if (factor == 2)
+			std::cout << "two times ";
+		else
+			std::cout << "one time ";
+		if (factor < 0)
+			std::cout << "cunter";
+		std::cout << "clockwise." << std::endl;
+		std::cout << std::endl;
+	}
+	this->solution += new_instruction;
 	this->solution += ' ';
 }
 

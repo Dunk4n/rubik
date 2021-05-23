@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 16:01:00 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 00:32:46 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 01:55:41 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ Rubik::Rubik(void)
 	this->size = 3;
 	this->graphique = false;
 	this->human_readable = false;
+	this->generator = false;
 	this->chose_sol = 1;
 	this->nb_cube = this->size * this->size * this->size -
 	(this->size - 2) * (this->size - 2) * (this->size - 2);
@@ -39,6 +40,7 @@ Rubik::Rubik(char *instructions)
 	this->instruction = instructions;
 	this->graphique = false;
 	this->human_readable = false;
+	this->generator = false;
 	this->sol = false;
 	this->solution = "";
 	this->chose_sol = 1;
@@ -63,6 +65,8 @@ Rubik::~Rubik(void)
 
 void	Rubik::display_solution(void)
 {
+	if (this->generator == true || this->human_readable == true)
+		std::cout << "Solution:" << std::endl;
 	std::cout << this->solution << std::endl;
 	if (this->graphique)
 		this->make_window();
@@ -75,6 +79,7 @@ void	Rubik::set_generateur(int nb)
 
 	if (nb <= 0)
 		return ;
+	this->generator = true;
 	srand(time(NULL));
 	if (nb > 100)
 		nb = 100;

@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 16:01:28 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 00:37:25 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 01:53:03 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,7 @@ class Rubik
 	bool		sol;
 	bool		graphique;
 	bool		human_readable;
+	bool		generator;
 	char		chose_sol;
 };
 
