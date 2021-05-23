@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 16:01:00 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 15:10:39 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 16:22:23 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,19 @@ Rubik::Rubik(char *instructions)
 		this->make_instructions(instructions);
 }
 
+void	Rubik::destroy(void)
+{
+	if (this->colors != NULL)
+		delete[] this->colors;
+	this->colors = NULL;
+	if (this->cubes != NULL)
+		delete[] this->cubes;
+	this->cubes = NULL;
+}
+
 Rubik::~Rubik(void)
 {
-	if (this->colors)
-		delete[] this->colors;
-	if (this->cubes)
-		delete[] this->cubes;
+	this->destroy();
 }
 
 void	Rubik::display_solution(void)

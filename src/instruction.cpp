@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 00:23:04 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 01:50:20 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 16:25:04 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,18 @@ void	Rubik::make_instruction(char *&instructions, int face)
 		return ;
 	instr = this->get_instruction(instructions, face);
 	if (instr == -1)
+	{
+		this->destroy();
 		throw std::exception();
+		return ;
+	}
 	factor = this->get_factor(instructions);
 	if (!factor)
+	{
+		this->destroy();
 		throw std::exception();
+		return ;
+	}
 	this->display_instruction(instr, factor);
 	switch (instr)
 	{

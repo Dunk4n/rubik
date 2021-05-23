@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 16:01:28 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 01:53:03 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 16:21:54 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ class Rubik
 	Rubik(char *instructions);
 	virtual ~Rubik(void);
 
+	void	destroy(void);
 	void	rotate_front(char factor);
 	void	rotate_right(char factor);
 	void	rotate_up(char factor);

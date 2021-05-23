@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:57:23 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/21 12:36:29 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 16:27:50 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,53 +93,59 @@ void	Rubik::make_window(void)
 
 	try
 	{
-	Display		win(WIDTH, HEIGHT, "RUBIK");
-	Camera		camera(glm::vec3(0, 0, 8), 70.0f, (float)WIDTH/(float)HEIGHT, 0.01f, 1000.0f);
-	Obj			cube = Obj();
-	Transform   tab[nb_cube];
-	s_anim		anim;
-	char		*instr = (char*)this->solution.c_str();
-	uint64_t	last = 0;
+		Display		win(WIDTH, HEIGHT, "RUBIK");
+		Camera		camera(glm::vec3(0, 0, 8), 70.0f, (float)WIDTH/(float)HEIGHT, 0.01f, 1000.0f);
+		Obj			cube = Obj();
+		Transform   tab[nb_cube];
+		s_anim		anim;
+		char		*instr = (char*)this->solution.c_str();
+		uint64_t	last = 0;
 
-	anim.start = false;
-	put_cube(tab, nb_cube);
+		anim.start = false;
+		put_cube(tab, nb_cube);
 
-	SDL_ShowCursor(SDL_DISABLE);
-	set_rubik(tab, nb_cube);
-	make_new_instruction(instr, &anim, tab, nb_cube);
-	while (!win.isClosed())
-	{
-		uint64_t	act_time = get_time();
-
-		if (act_time >= last)
+		SDL_ShowCursor(SDL_DISABLE);
+		set_rubik(tab, nb_cube);
+		make_new_instruction(instr, &anim, tab, nb_cube);
+		while (!win.isClosed())
 		{
-			win.clear(0.9f, 0.9f, 0.9f, 1.0f);
-			last = act_time + 16666;
-			if (anim.start)
+			uint64_t	act_time = get_time();
+
+			if (act_time >= last)
 			{
-				if (anim.instr >= 0)
+				win.clear(0.9f, 0.9f, 0.9f, 1.0f);
+				last = act_time + 16666;
+				if (anim.start)
 				{
-					make_rotation(&anim, (double)(act_time  - (anim.time_end -
-					(ROTATION_TIME * (anim.factor == 2 ? 2 : 1)))) /
-					(double)(ROTATION_TIME * (anim.factor == 2 ? 2 : 1)));
-					if (act_time >= anim.time_end)
-						make_new_instruction(instr, &anim, tab, nb_cube);
+					if (anim.instr >= 0)
+					{
+						make_rotation(&anim, (double)(act_time  - (anim.time_end -
+						(ROTATION_TIME * (anim.factor == 2 ? 2 : 1)))) /
+						(double)(ROTATION_TIME * (anim.factor == 2 ? 2 : 1)));
+						if (act_time >= anim.time_end)
+							make_new_instruction(instr, &anim, tab, nb_cube);
+					}
 				}
+				i = 0;
+				while (i < nb_cube)
+				{
+					cube.setTransform(tab[i]);
+					cube.draw(camera);
+					++i;
+				}
+				win.update(&camera, &anim);
 			}
-			i = 0;
-			while (i < nb_cube)
-			{
-				cube.setTransform(tab[i]);
-				cube.draw(camera);
-				++i;
-			}
-			win.update(&camera, &anim);
 		}
-	}
 	}
 	catch (std::exception &e)
 	{
 		(void)e;
 		std::cout << "WINDOW ERROR" << std::endl;
+		this->destroy();
+	}
+	catch (...)
+	{
+		std::cout << "WINDOW ERROR" << std::endl;
+		this->destroy();
 	}
 }
