@@ -6,7 +6,7 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 15:55:45 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 16:24:07 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 19:34:49 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,34 @@
 
 #include "Rubik.hpp"
 
+void	rubik_program_usage(void)
+{
+	std::cout << "./rubik \"F R2 U' ...\" OPTIONS" << std::endl << std::endl <<
+	"OPTIONS" << std::endl <<
+	"-h --help\tDisplay this help and exit" << std::endl <<
+	"-d\t\tDisplay rubik" << std::endl <<
+	"-s\t\tChange algorithme of rubik resolution" << std::endl <<
+	"-g[0-100]\tgenerate instructions" << std::endl <<
+	"-w\t\tdisplay 3d rubik" << std::endl <<
+	std::endl <<
+	"WINDOW COMMAND" << std::endl <<
+	"\t'r' to start to resolve the rubik" << std::endl <<
+	"\t'w' to go forward and      's' to go backward" << std::endl <<
+	"\t'd' to go to the right and 'a' to go to the left" << std::endl <<
+	"\t'e' to go up and           'q' to go down" << std::endl;
+	return ;
+}
+
 int		get_flag(int ac, char **av, Rubik *ru)
 {
 	while (ac)
 	{
-		if (!strcmp("-d", av[0]))
+		if (!strcmp("-h", av[0]) || !strcmp("--help", av[0]))
+		{
+			rubik_program_usage();
+			return (2);
+		}
+		else if (!strcmp("-d", av[0]))
 			ru->set_display(!ru->get_display());
 		else if (!strcmp("-s", av[0]))
 			ru->chage_resolve(!ru->get_resolve());
@@ -36,23 +59,6 @@ int		get_flag(int ac, char **av, Rubik *ru)
 		av++;
 	}
 	return (1);
-}
-
-void	rubik_program_usage(void)
-{
-	std::cout << "./rubik \"F R2 U' ...\" OPTIONS" << std::endl << std::endl <<
-	"OPTIONS" << std::endl <<
-	"-d\t\tdisplay rubik" << std::endl <<
-	"-s\t\tchange algorithme" << std::endl <<
-	"-g[0-100]\tgenerate instructions" << std::endl <<
-	"-w\t\tdisplay 3d rubik" << std::endl <<
-	std::endl <<
-	"WINDOW COMMAND" << std::endl <<
-	"\t'r' to start to resolve the rubik" << std::endl <<
-	"\t'w' to go forward and      's' to go backward" << std::endl <<
-	"\t'd' to go to the right and 'a' to go to the left" << std::endl <<
-	"\t'e' to go up and           'q' to go down" << std::endl;
-	return ;
 }
 
 int		check_define_range(void)
@@ -82,6 +88,9 @@ int		check_define_range(void)
 
 int		main(int ac, char **av)
 {
+	int arg_ret;
+
+	arg_ret = 1;
 	if (check_define_range() == 1)
 	{
 		rubik_program_usage();
@@ -95,12 +104,16 @@ int		main(int ac, char **av)
 	try
 	{
 		Rubik	ru(av[1]);
-		if (!get_flag(ac - 2, av + 2, &ru))
+
+		arg_ret = get_flag(ac - 2, av + 2, &ru);
+		if (arg_ret == 0)
 		{
 			std::cerr << "ERROR arguments" << std::endl << std::endl;
 			rubik_program_usage();
-			return (0);
+			return (1);
 		}
+		if (arg_ret == 2)
+			return (0);
 		ru.resolve();
 		ru.display_solution();
 	}

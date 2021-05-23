@@ -6,12 +6,12 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:58:08 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/23 16:25:58 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 17:31:18 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <GL/glew.h>
 #include <iostream>
+#include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <exception>
 #include "display.hpp"
@@ -42,7 +42,10 @@ SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
     if (!m_glContext)
     {
         if (m_window)
+        {
             SDL_DestroyWindow(m_window);
+            m_window = NULL;
+        }
         SDL_Quit();
         throw (std::exception());
     }
@@ -53,9 +56,15 @@ SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
     {
         std::cerr << "Glew faild to initialize!" << std::endl;
         if (m_glContext)
+        {
             SDL_GL_DeleteContext(m_glContext);
+            m_glContext = NULL;
+        }
         if (m_window)
+        {
             SDL_DestroyWindow(m_window);
+            m_window = NULL;
+        }
         SDL_Quit();
         throw (std::exception());
     }
