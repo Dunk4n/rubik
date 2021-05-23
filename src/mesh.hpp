@@ -6,12 +6,14 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:58:32 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/22 22:48:13 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 15:33:17 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MESH_H
 #define MESH_H
+
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include <glm/glm.hpp>
 #include <GL/glew.h>

@@ -6,12 +6,14 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:59:22 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/22 22:54:37 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 15:33:20 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
+
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include <glm/gtx/transform.hpp>
 

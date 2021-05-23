@@ -6,12 +6,14 @@
 /*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:58:01 by niduches          #+#    #+#             */
-/*   Updated: 2021/05/22 23:01:49 by niduches         ###   ########.fr       */
+/*   Updated: 2021/05/23 15:32:52 by niduches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 #define CAMERA_H
+
+#define GLM_ENABLE_EXPERIMENTAL
 
 #include <glm/gtx/transform.hpp>
 
