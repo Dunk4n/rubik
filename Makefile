@@ -51,7 +51,7 @@ all: $(NAME)
 $(BUILD_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	@echo "  CC       $<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)

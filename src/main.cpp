@@ -22,7 +22,7 @@ void	rubik_program_usage(void)
 	"OPTIONS" << std::endl <<
 	"-h --help\tDisplay this help and exit" << std::endl <<
 	"-d\t\tDisplay rubik" << std::endl <<
-	"-s\t\tChange algorithme of rubik resolution" << std::endl <<
+	"-s\t\tChange thistlethwaite to Belgian rubik solving algorithm" << std::endl <<
 	"-g[0-100]\tgenerate instructions" << std::endl <<
 	"-w\t\tdisplay 3d rubik" << std::endl <<
 	std::endl <<

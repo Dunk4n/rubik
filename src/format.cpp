@@ -228,7 +228,7 @@ int		thistlethwaite(class Rubik *ru, std::vector<int> &currentState, std::string
 {
 	int					phase;
 	std::vector<int>	goalState(40);
-  
+
 	for (int i = 0; i < 20; i++)
 		goalState[i] = i;
 	phase = 0;
