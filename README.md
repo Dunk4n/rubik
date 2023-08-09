@@ -1,6 +1,6 @@
 # Rubik
 
-_The goal of the project is to solve 3x3x3 [Rubik's Cubes](https://en.wikipedia.org/wiki/Rubik%27s_Cube) with minimum spins using Thistlethwaite's 52-move algorithm._
+_The goal of the project is to solve 3x3x3 [Rubik's Cubes](https://en.wikipedia.org/wiki/Rubik%27s_Cube) with minimum spins using Thistlethwaite's 52-move algorithm with graphical display using modern openGL._
 
 ## Installation:
 
